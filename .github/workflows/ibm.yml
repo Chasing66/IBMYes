@@ -18,6 +18,10 @@ jobs:
     - name: Init
       run: |
         chmod -R 777 ./IBM_Cloud_CLI/
+        git submodule update --init --recursive
+        cd v2ray-cloudfoundry/v2ray
+        # Upgrade V2Ray to the latest version
+        rm v2ray v2ctl
 
     - name: Login IBM Cloud
       env:
