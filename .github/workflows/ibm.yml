@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '0 12 * * 1'
+    - cron: '0 12 * * FRI'
 
 jobs:
   ibm-cloud-restart:
@@ -34,8 +34,6 @@ jobs:
       env:
         RESOURSE_ID: ${{ secrets.RESOURSE_ID }}
       run: |
-        ls -ltrh
-        pwd
         ./IBM_Cloud_CLI/ibmcloud target -g "$RESOURSE_ID"
         ./IBM_Cloud_CLI/ibmcloud target --cf
         ./IBM_Cloud_CLI/ibmcloud cf install
@@ -46,8 +44,8 @@ jobs:
         wget -q https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
         unzip -o v2ray-linux-64.zip
         pwd
-        ls -ltrh
-        mv v2ray v2ctl -f v2ray-cloudfoundry/v2ray
+        ls -ltrh v2ray-cloudfoundry
+        mv v2ray v2ctl geoip.dat geosite.dat -f v2ray-cloudfoundry/v2ray
         chmod -R 700 ./v2ray-cloudfoundry/v2ray/ 
         ./IBM_Cloud_CLI/ibmcloud cf push "$IBM_APP_NAME"
 
