@@ -36,6 +36,11 @@ jobs:
       run: |
         rm -rf v2ray-cloudfoundry
         git clone https://github.com/a132395/v2ray-cloudfoundry.git
+        wget -q https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip
+        unzip -o v2ray-linux-64.zip "v2ray" "v2ctl" "geosite.dat" "geoip.dat" 
+        cp -f "v2ray" "v2ctl" "geosite.dat" "geoip.dat"  v2ray-cloudfoundry/v2ray/.
+        rm -rf v2ray-linux-64.zip
+        chmod 700 v2ray v2ctl
         chmod +x /home/runner/work/IBMYes/IBMYes/v2ray-cloudfoundry/v2ray/*
         cd v2ray-cloudfoundry
         sed -i "s/GetStartedGo/${{ secrets.IBM_APP_NAME }}/g"  /home/runner/work/IBMYes/IBMYes/v2ray-cloudfoundry/manifest.yml
